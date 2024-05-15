@@ -1,6 +1,4 @@
-
 import SwiftUI
-import FirebaseDatabase // FirebaseDatabaseのインポートを追加
 
 struct AccountRegistrationView: View {
     @State private var selectedSNS = "ユーザーのSNSツール1"
@@ -9,6 +7,8 @@ struct AccountRegistrationView: View {
     @State private var fanCount = ""
     @State private var url = ""
     @State private var showingConfirmation = false
+    
+    let email: String
     
     let snsOptions = ["ユーザーのSNSツール1", "Youtube", "Twitter", "Instagram", "Tiktok"]
     let genreOptions = ["ツールのジャンル1", "音楽", "ゲーム", "漫画/アニメ", "バラエティ/エンタメ", "Vlog", "教育", "商品紹介/レビュー", "日常生活", "旅行", "料理", "趣味/ライフスタイル", "メイク/ファッション", "家族/カップル", "ビジネススキル", "お金/投資", "語学", "大食い", "ギャンブル", "政治・ニュース"]
@@ -88,7 +88,14 @@ struct AccountRegistrationView: View {
             }
             .padding(.vertical, 20)
             .sheet(isPresented: $showingConfirmation) {
-                ConfirmationView(selectedSNS: selectedSNS, selectedGenre: selectedGenre, accountName: accountName, fanCount: fanCount, url: url)
+                ConfirmationView(
+                    email: email,
+                    selectedSNS: selectedSNS,
+                    selectedGenre: selectedGenre,
+                    accountName: accountName,
+                    fanCount: fanCount,
+                    url: url
+                )
             }
         }
         .padding()
@@ -105,6 +112,6 @@ struct AccountRegistrationView: View {
 
 struct AccountRegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountRegistrationView()
+        AccountRegistrationView(email: "example@example.com")
     }
 }

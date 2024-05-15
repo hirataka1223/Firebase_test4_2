@@ -1,13 +1,15 @@
 import SwiftUI
+import Firebase
 
 struct ConfirmationView: View {
     @State private var isRegistrationComplete: Bool = false
+    let email: String
     let selectedSNS: String
     let selectedGenre: String
     let accountName: String
     let fanCount: String
     let url: String
-    @Environment(\.presentationMode) var presentationMode // 追加
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
@@ -66,6 +68,7 @@ struct ConfirmationView: View {
                 
                 HStack(spacing: 20) {
                     Button(action: {
+                        saveToFirestore()
                         self.isRegistrationComplete = true
                     }) {
                         Text("登録する")
@@ -78,7 +81,7 @@ struct ConfirmationView: View {
                     }
                     
                     Button(action: {
-                        self.presentationMode.wrappedValue.dismiss() // 追加: モーダルを閉じる
+                        self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("修正する")
                             .font(.headline)
@@ -91,18 +94,35 @@ struct ConfirmationView: View {
                 }
             }
             .padding()
-            .navigationBarTitle("", displayMode: .inline) // NavigationBarTitleの追加
+            .navigationBarTitle("", displayMode: .inline)
             .background(
                 NavigationLink(
-                    destination: isRegistrationComplete ?
-                    AnyView(MyPageView(email: "", selectedSNS: selectedSNS, selectedGenre: selectedGenre, accountName: accountName, fanCount: fanCount, url: url)) :
-                        AnyView(AccountRegistrationView()),
+                    destination: MyPageView(email: email),
                     isActive: $isRegistrationComplete
                 ) {
                     EmptyView()
                 }
                     .hidden()
             )
+        }
+    }
+    
+    private func saveToFirestore() {
+        let db = Firestore.firestore()
+        let data: [String: Any] = [
+            "email": email,
+            "selectedSNS": selectedSNS,
+            "selectedGenre": selectedGenre,
+            "accountName": accountName,
+            "fanCount": fanCount,
+            "url": url
+        ]
+        db.collection("users").addDocument(data: data) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added successfully")
+            }
         }
     }
     
@@ -115,14 +135,15 @@ struct ConfirmationView: View {
     }
 }
 
-
-
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView(selectedSNS: "Youtube", selectedGenre: "音楽", accountName: "サンプルアカウント", fanCount: "1000", url: "https://example.com")
+        ConfirmationView(
+            email: "example@example.com",
+            selectedSNS: "Youtube",
+            selectedGenre: "音楽",
+            accountName: "サンプルアカウント",
+            fanCount: "1000",
+            url: "https://example.com"
+        )
     }
 }
-
-
-
-
