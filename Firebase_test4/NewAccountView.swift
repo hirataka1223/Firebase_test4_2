@@ -98,7 +98,7 @@ struct NewAccountView: View {
     private func handleError(_ error: Error) {
         if let err = error as NSError? {
             // AuthErrorCodeの初期化方法を修正
-            let errorCode = AuthErrorCode(rawValue: err.code)
+            let errorCode = AuthErrorCode.Code(rawValue: err.code)
             
             switch errorCode {
             case .invalidEmail:
