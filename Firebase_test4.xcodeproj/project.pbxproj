@@ -16,6 +16,7 @@
 		1F9A64502BB7BF7D00816094 /* NewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9A644F2BB7BF7D00816094 /* NewAccountView.swift */; };
 		1F9A64522BB7BF7E00816094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9A64512BB7BF7E00816094 /* Assets.xcassets */; };
 		1F9A64552BB7BF7E00816094 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9A64542BB7BF7E00816094 /* Preview Assets.xcassets */; };
+		1FA34F572C245C7200900D24 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA34F562C245C7200900D24 /* File.swift */; };
 		1FEF4E312BC4374600FC63B8 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF4E302BC4374600FC63B8 /* MyPageView.swift */; };
 		8CE361920950428BF488EC9E /* Pods_Firebase_test4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF95FE9B5B3518CD7F363D0 /* Pods_Firebase_test4.framework */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		1F9A644F2BB7BF7D00816094 /* NewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountView.swift; sourceTree = "<group>"; };
 		1F9A64512BB7BF7E00816094 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F9A64542BB7BF7E00816094 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1FA34F562C245C7200900D24 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		1FEF4E302BC4374600FC63B8 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		7AF95FE9B5B3518CD7F363D0 /* Pods_Firebase_test4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Firebase_test4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D86FC966A8F9F66198F10B /* Pods-Firebase_test4.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firebase_test4.release.xcconfig"; path = "Target Support Files/Pods-Firebase_test4/Pods-Firebase_test4.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				1F0686262BC1AAD600113A57 /* ConfirmationView.swift */,
 				1FEF4E302BC4374600FC63B8 /* MyPageView.swift */,
 				1F41874F2BF4D4A200A4D25A /* UserAccountDetails.swift */,
+				1FA34F562C245C7200900D24 /* File.swift */,
 				1F9A64512BB7BF7E00816094 /* Assets.xcassets */,
 				1F6AE19D2BBC66E3007333AD /* GoogleService-Info.plist */,
 				1F9A64532BB7BF7E00816094 /* Preview Content */,
@@ -236,6 +239,7 @@
 				1F9A644E2BB7BF7D00816094 /* Firebase_test4App.swift in Sources */,
 				1F6AE1A12BBC6939007333AD /* GoogleAccountLogin.swift in Sources */,
 				1F4187502BF4D4A200A4D25A /* UserAccountDetails.swift in Sources */,
+				1FA34F572C245C7200900D24 /* File.swift in Sources */,
 				1F811CF52BBDB5820001DCDA /* AccountRegistrationView.swift in Sources */,
 				1FEF4E312BC4374600FC63B8 /* MyPageView.swift in Sources */,
 			);

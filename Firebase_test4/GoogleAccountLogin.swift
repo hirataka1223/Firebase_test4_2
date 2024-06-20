@@ -11,16 +11,19 @@ struct GoogleAccountLogin: View {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         
+        // 現行の SwiftUI ビューをプレゼンティングビューコントローラとして使用
         if let rootViewController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
-            GIDSignIn.sharedInstance.signIn(with: config, presenting: rootViewController) { user, error in
-                if let error = error {
-                    print("GIDSignInError: \(error.localizedDescription)")
+            GIDSignIn.sharedInstance.signIn(with: config, presenting: rootViewController) { [unowned self] user, error in
+                // エラーハンドリング
+                guard error == nil else {
+                    print("GIDSignInError: \(error!.localizedDescription)")
                     return
                 }
                 
+                // 認証データの取得
                 guard let authentication = user?.authentication,
-                      let idToken = authentication.idToken, // ここでStringとして取得
-                      let accessToken = authentication.accessToken else { // ここでStringとして取得
+                      let idToken = authentication.idToken,
+                      let accessToken = authentication.accessToken else {
                     return
                 }
                 
@@ -31,14 +34,13 @@ struct GoogleAccountLogin: View {
     }
     
     private func login(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { authResult, error in
+        Auth.auth().signIn(with: credential) { [unowned self] authResult, error in
             if let error = error {
                 print("SignInError: \(error.localizedDescription)")
                 return
             }
             
             if let user = authResult?.user {
-                // 新規登録かログインかを判断
                 self.navigationManager.isSignUpComplete = user.metadata.creationDate == user.metadata.lastSignInDate
                 self.navigationManager.isSignInComplete = !self.navigationManager.isSignUpComplete
             }
