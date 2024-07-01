@@ -20,10 +20,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Firebase_test4: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    // NavigationManagerのインスタンスを作成
+    @StateObject var navigationManager = NavigationManager()
     
     var body: some Scene {
         WindowGroup {
+            // NavigationManagerのインスタンスをビュー階層に追加
             NewAccountView()
+                .environmentObject(navigationManager)
         }
     }
 }

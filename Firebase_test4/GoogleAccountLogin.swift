@@ -9,32 +9,36 @@ struct GoogleAccountLogin: View {
     
     private func googleAuth() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
         let config = GIDConfiguration(clientID: clientID)
+        
+        // 追記
+        GIDSignIn.sharedInstance.configuration = config
         
         // 現行の SwiftUI ビューをプレゼンティングビューコントローラとして使用
         if let rootViewController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
-            GIDSignIn.sharedInstance.signIn(with: config, presenting: rootViewController) { [unowned self] user, error in
+            GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { user, error in
                 // エラーハンドリング
                 guard error == nil else {
                     print("GIDSignInError: \(error!.localizedDescription)")
                     return
                 }
                 
-                // 認証データの取得
-                guard let authentication = user?.authentication,
-                      let idToken = authentication.idToken,
-                      let accessToken = authentication.accessToken else {
+//                 認証データの取得
+                guard let authentication = user?.user,
+                    let idToken = authentication.idToken?.tokenString
+                else {
                     return
                 }
-                
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-                self.login(credential: credential)
+
+                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken.tokenString)
+                login(credential: credential)
             }
         }
     }
     
     private func login(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { [unowned self] authResult, error in
+        Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error {
                 print("SignInError: \(error.localizedDescription)")
                 return
